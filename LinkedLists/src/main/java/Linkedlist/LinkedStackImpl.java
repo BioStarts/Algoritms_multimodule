@@ -6,7 +6,7 @@ public class LinkedStackImpl<E> implements Stack<E> {
 
     private final LinkedList<E> data;
 
-    public LinkedStackImpl(LinkedList<E> data) {
+    public LinkedStackImpl() {
         this.data = new SimpleLinkedListImpl<>();
     }
 
