@@ -1,7 +1,6 @@
 package iterator;
 
 
-import Linkedlist.Entry;
 import Linkedlist.LinkedList;
 import Linkedlist.SimpleLinkedListImpl;
 
@@ -20,16 +19,23 @@ public class TestIterator {
         linkedList.insert(2);
         linkedList.insert(3);
 
-        /*for (Integer element: linkedList
+        for (Integer element: linkedList
              ) {
-            System.out.println(element);
-        }*/
+            System.out.println("лол: " +  element);
+        }
 
-        Entry<Integer> current = linkedList.getFirst();
+        System.out.println("------2попытка------");
+
+        for (Integer element: linkedList
+        ) {
+            System.out.println("лол: " +  element);
+        }
+
+        /*Entry<Integer> current = linkedList.getFirst();
         while ( current != null ) {
             System.out.println(current);
             current = current.getNext();
-        }
+        }*/
 
 
     }
