@@ -1,9 +1,15 @@
 package Linkedlist;
 
+
+import java.util.*;
+import java.util.function.Consumer;
+
 public class SimpleLinkedListImpl<E> implements LinkedList<E> {
 
     protected Entry<E> firstElement;
     protected int currentSize;
+
+    //transient Object[] elementData;
 
 
     public void insert(E value) {
@@ -87,4 +93,85 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E> {
     public Entry<E> getFirst() {
         return firstElement;
     }
+
+    /// удалить ниже и имплементс итерабле в линкдлист интерфейсе в случае краха  + elementData удалить вверху страницы
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Itr();
+    }
+
+    @Override
+    public void forEach(Consumer<? super E> action) {
+
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+        return null;
+    }
+
+    private class Itr implements Iterator<E> {
+        int cursor;       // index of next element to return
+        int lastRet = -1; // index of last element returned; -1 if no such
+        Object current;
+
+        //int expectedModCount = 0;
+
+        Itr() {
+        }
+
+        /*public boolean hasNext() {
+            return cursor != currentSize;
+        }*/
+
+        public boolean hasNext() {
+            return cursor < currentSize;
+        }
+
+        @SuppressWarnings("unchecked")
+        public E next() {
+
+            /*if (!hasNext()){
+                throw new NoSuchElementException();
+            }
+
+            int i = lastRet;
+
+            while (i < cursor) {
+                if (current == null){
+                    current = firstElement;
+                    i++;
+                    break;
+                }
+
+                current =  current;
+                i++;
+
+            }
+
+            lastRet = i;
+            cursor = i+1;
+            return (E) current;*/
+
+            if (isEmpty())
+                return null;
+
+
+            Entry<E> removeElement = firstElement;
+            SimpleLinkedListImpl<E> newS = new SimpleLinkedListImpl<>();
+            newS.insert(firstElement.getvalue());
+            firstElement = firstElement.getNext();
+            currentSize--;
+
+            /*if (isEmpty()) {
+                SimpleLinkedListImpl.this = newS;
+            }*/
+
+            return removeElement.getvalue();
+        }
+
+    }
 }
+
+

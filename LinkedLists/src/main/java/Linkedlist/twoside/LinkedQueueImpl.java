@@ -6,7 +6,7 @@ public class LinkedQueueImpl<E> implements Queue<E> {
 
     private TwoSideLinkedList<E> data;
 
-    public LinkedQueueImpl(TwoSideLinkedList<E> data) {
+    public LinkedQueueImpl() {
         this.data = new TwoSideLinkedListImpl<>();
     }
 
