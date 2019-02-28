@@ -1,6 +1,8 @@
 package Linkedlist;
 
 
+import iterator.ListIterator;
+
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -98,7 +100,7 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Itr();
+        return new LinkedListIterator<E>(this);
     }
 
     @Override
@@ -111,66 +113,81 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E> {
         return null;
     }
 
-    private class Itr implements Iterator<E> {
-        int cursor;       // index of next element to return
-        int lastRet = -1; // index of last element returned; -1 if no such
-        Object current;
 
-        //int expectedModCount = 0;
 
-        Itr() {
+    private static class LinkedListIterator<E> implements ListIterator<E> {
+
+        private SimpleLinkedListImpl list;
+
+        private Entry<E> current;
+        private Entry<E> previous;
+
+        public LinkedListIterator(SimpleLinkedListImpl<E> list) {
+            this.list = list;
+            reset();
         }
 
-        /*public boolean hasNext() {
-            return cursor != currentSize;
-        }*/
 
+        @Override
         public boolean hasNext() {
-            return cursor < currentSize;
+            return current != null;
         }
 
-        @SuppressWarnings("unchecked")
+        @Override
         public E next() {
-
-            /*if (!hasNext()){
-                throw new NoSuchElementException();
-            }
-
-            int i = lastRet;
-
-            while (i < cursor) {
-                if (current == null){
-                    current = firstElement;
-                    i++;
-                    break;
-                }
-
-                current =  current;
-                i++;
-
-            }
-
-            lastRet = i;
-            cursor = i+1;
-            return (E) current;*/
-
-            if (isEmpty())
-                return null;
-
-
-            Entry<E> removeElement = firstElement;
-            SimpleLinkedListImpl<E> newS = new SimpleLinkedListImpl<>();
-            newS.insert(firstElement.getvalue());
-            firstElement = firstElement.getNext();
-            currentSize--;
-
-            /*if (isEmpty()) {
-                SimpleLinkedListImpl.this = newS;
-            }*/
-
-            return removeElement.getvalue();
+            E nextValue = current.getvalue();
+            previous = current;
+            current = current.getNext();
+            return nextValue;
         }
 
+        @Override
+        public void remove() {
+            if (previous == null){
+                list.firstElement = current.getNext();
+                reset();
+            } else {
+                previous.setNext(current.getNext());
+                if ( !hasNext() ) {
+                    reset();
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+
+        @Override
+        public void reset() {
+            current = list.firstElement;
+            previous = null;
+        }
+
+        @Override
+        public void insertBefore(E value) {
+            Entry newItem = new Entry(value);
+            if(previous == null){
+                newItem.setNext(list.firstElement);
+                list.firstElement = newItem;
+                reset();
+            } else {
+                newItem.setNext(previous.getNext());
+                previous.setNext(newItem);
+                current = newItem;
+            }
+        }
+
+        @Override
+        public void insertAfter(E value) {
+            Entry newItem = new Entry(value);
+            if(list.isEmpty()){
+                list.firstElement = newItem;
+                current = newItem;
+            } else {
+                newItem.setNext(current.getNext());
+                current.setNext(newItem);
+                next();
+            }
+        }
     }
 }
 

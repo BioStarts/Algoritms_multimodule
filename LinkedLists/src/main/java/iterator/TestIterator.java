@@ -31,12 +31,27 @@ public class TestIterator {
             System.out.println("лол: " +  element);
         }
 
-        /*Entry<Integer> current = linkedList.getFirst();
-        while ( current != null ) {
-            System.out.println(current);
-            current = current.getNext();
-        }*/
+        System.out.println("------3------");
 
+        ListIterator<Integer> iterator = (ListIterator) linkedList.iterator();
+        iterator.reset();
+        iterator.insertAfter(11);
+        iterator.next();
+        iterator.remove();
+        iterator.insertBefore(0);
 
+        while (iterator.hasNext()){
+            Integer next = iterator.next();
+        }
+
+        displayAll(linkedList);
+
+    }
+
+    private static void displayAll (LinkedList<Integer> list){
+        for (Integer value: list
+             ) {
+            System.out.println(value);
+        }
     }
 }
