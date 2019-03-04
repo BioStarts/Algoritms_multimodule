@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class maxCost {
+public class MaxCostRefactoring {
 
     static final int MAX_WEIGHT = 3;
 
