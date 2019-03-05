@@ -1,6 +1,15 @@
+import java.util.Objects;
+
 public class Node<E extends Comparable<? super E>> {
 
     private E value;
+
+    /****/
+    int level;
+
+    public int getLevel() {
+        return level;
+    }
 
     private Node<E> leftChild;
     private Node<E> rightChild;
@@ -38,5 +47,26 @@ public class Node<E extends Comparable<? super E>> {
         else {
             return false;
         }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Node)) return false;
+        Node<?> node = (Node<?>) o;
+        return Objects.equals(getValue(), node.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "value=" + value +
+                '}';
     }
 }
