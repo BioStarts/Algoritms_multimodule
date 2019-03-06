@@ -4,13 +4,6 @@ public class Node<E extends Comparable<? super E>> {
 
     private E value;
 
-    /****/
-    int level;
-
-    public int getLevel() {
-        return level;
-    }
-
     private Node<E> leftChild;
     private Node<E> rightChild;
 

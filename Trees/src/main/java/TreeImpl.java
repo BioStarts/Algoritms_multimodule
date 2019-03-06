@@ -6,11 +6,9 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
 
 
     public void add(E value) {
-        Node<E> newNode = new Node<E>(value);
+        Node<E> newNode = new Node<>(value);
         if (isEmpty()) {  // если дерево пустое, то приравниваем вершину добавляемому значению
             rootNode = newNode;
-            /****/
-            newNode.level = 1;
             return;
         }
 
@@ -18,8 +16,6 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
         Node<E> previous = null;
         while ( current!= null){
             previous = current;
-            /****/
-            current.level = previous.level + 1;
 
             if ( current.getValue().equals(value) ){
                 return;
@@ -165,7 +161,7 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     }
 
     /****/
-    public int findForLevel(E value) {
+    public int findForLevel(E value) { // весьма не эффективный метод для поиска уровня элемента, но подходит для нашей задачи
 
         Node<E> current = rootNode;
         int io = 1;

@@ -1,5 +1,7 @@
 public class Main6 {
 
+    public static int balanceTree = 0;
+
     public static void main(String[] args) {
 
         Tree<Integer> tree = new TreeImpl<>();
@@ -21,12 +23,12 @@ public class Main6 {
         tree.display();
         System.out.println(((TreeImpl<Integer>) tree).findForLevel(32));*/
 
-        newRanTree();
-        newRanTree();
-        newRanTree();
-        newRanTree();
-        newRanTree();
-        newRanTree();
+
+        //Создаю 20 рандомных деревьев
+        for (int i = 0; i < 20; i++) {
+            newRanTree();
+        }
+        System.out.println("Из 20 деревьев сбалансированно " + balanceTree);
 
     }
 
@@ -34,21 +36,19 @@ public class Main6 {
         Tree<Integer> treeRand = new TreeImpl<>();
         int a = -20;
         int b =  40;
-        int root;
         for (int i = 0; i < 20; i++) {
             int random_number = a + (int)(Math.random() * b);
-            if ( ((TreeImpl<Integer>) treeRand).findForLevel(random_number) == 5 ){
+            if ( ((TreeImpl<Integer>) treeRand).findForLevel(random_number) == 5 ){ // если уровень вложенности в дерево = 5, то пропускаем итерацию
                 break;
-                //treeRand.remove(random_number);
-            }
-            if ( i == 0){
-                root = random_number;
             }
             treeRand.add(random_number);
         }
         //treeRand.display();
-        System.out.println(((TreeImpl<Integer>) treeRand).isBalanced(((TreeImpl<Integer>) treeRand).rootNode));
-        System.out.println(((TreeImpl<Integer>) treeRand).height(((TreeImpl<Integer>) treeRand).rootNode));
+        //System.out.println(((TreeImpl<Integer>) treeRand).isBalanced(((TreeImpl<Integer>) treeRand).rootNode));
+        System.out.println("Глубина дерева = " + ((TreeImpl<Integer>) treeRand).height(((TreeImpl<Integer>) treeRand).rootNode));
+        if (((TreeImpl<Integer>) treeRand).isBalanced(((TreeImpl<Integer>) treeRand).rootNode)){ // инкрементирую счетчик если дерево сбалансированно
+            balanceTree++;
+        }
         System.out.println("----------------Next-----------------");
     }
 }
