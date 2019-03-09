@@ -16,7 +16,7 @@
       <module name="LinkedLists" target="1.8" />
       <module name="recursion" target="1.5" />
       <module name="stackanddeque" target="1.8" />
-      <module name="Trees" target="7" />
+      <module name="Trees" target="8" />
       <module name="zord" target="1.5" />
     </bytecodeTargetLevel>
   </component>

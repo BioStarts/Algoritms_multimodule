@@ -1,3 +1,6 @@
+import java.util.Comparator;
+import java.util.TreeSet;
+
 public class Main6 {
 
     public static int balanceTree = 0;
@@ -29,6 +32,19 @@ public class Main6 {
             newRanTree();
         }
         System.out.println("Из 20 деревьев сбалансированно " + balanceTree);
+
+
+        System.out.println();
+        System.out.println("Стандартная java реализация treeSet коллекции с заранее определеннем в классе Person интерфейсом comparable: ");
+        TreeSet<Person> treeSet = new TreeSet<>();
+        treeSet.add(new Person(5,"Oleg"));
+        treeSet.add(new Person(3,"Oleg"));
+        treeSet.add(new Person(9,"Oleg"));
+        treeSet.add(new Person(2,"Oleg"));
+
+        for (Person person : treeSet) {
+            System.out.println(person);
+        }
 
     }
 
