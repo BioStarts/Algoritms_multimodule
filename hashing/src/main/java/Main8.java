@@ -3,6 +3,22 @@ public class Main8 {
     public static void main(String[] args) {
         doubleHashTableTest();
         hashTableTest();
+
+        chainHashMapTest();
+
+    }
+
+    private static void chainHashMapTest() {
+        ChainHashMap hashTable = new ChainHashMap(1100);
+        hashTable.put(new ItemChain(5,"Уу"),120);
+        hashTable.put(new ItemChain(5,"Уеееес"),120);
+        hashTable.remove(new ItemChain(5,"Уу"));
+
+        System.out.println("Size is " + hashTable.getSize());
+
+        hashTable.display();
+
+        System.out.println(hashTable.get(new ItemChain(5,"Уеееес")));
     }
 
     private static void hashTableTest() {
